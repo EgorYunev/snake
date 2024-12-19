@@ -15,8 +15,9 @@ func start() {
 	field.Diametr = [10][10]string{}
 
 	snake := Snake{
-		X: 5,
-		Y: 5,
+		X:         5,
+		Y:         5,
+		Fragments: []Fragment{Fragment{X: 5, Y: 5, image: "0"}},
 	}
 
 	whichKey := make(chan rune)
