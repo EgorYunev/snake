@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/eiannone/keyboard"
 )
 
@@ -24,7 +22,6 @@ func GetKeys(whichKey chan rune, isEnd chan bool) {
 			break
 		}
 		whichKey <- char
-		time.Sleep(time.Millisecond * 100)
 	}
 
 }

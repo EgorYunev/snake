@@ -8,11 +8,13 @@ type Apple struct {
 	Y     int
 }
 
-func Create() Apple {
+func CreateApple(s *Snake) Apple {
+	a := Apple{X: rand.Intn(10), Y: rand.Intn(10)}
 
-	return Apple{
-		X: rand.Intn(10),
-		Y: rand.Intn(10),
+	for _, f := range s.Fragments {
+		if f.X == a.X && f.Y == a.Y {
+			a = CreateApple(s)
+		}
 	}
-
+	return a
 }

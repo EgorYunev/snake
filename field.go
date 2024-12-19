@@ -16,6 +16,7 @@ type Field struct {
 
 func (f *Field) Draw(s *Snake, a *Apple) {
 	for {
+		fmt.Println("Enter esc to exit game")
 		for i := 0; i < len(f.Diametr); i++ {
 		Y:
 			for j := 0; j < len(f.Diametr[i]); j++ {

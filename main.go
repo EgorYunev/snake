@@ -14,16 +14,18 @@ func start() {
 
 	field.Diametr = [10][10]string{}
 
+	head := Fragment{X: 5, Y: 5, image: "0"}
+
 	snake := Snake{
-		X:         5,
-		Y:         5,
-		Fragments: []Fragment{Fragment{X: 5, Y: 5, image: "0"}},
+		Fragments: []Fragment{head, Fragment{X: 5, Y: 4, image: "o"}, Fragment{X: 5, Y: 3, image: "o"}},
+		Head:      head,
+		Direction: 'd',
 	}
 
 	whichKey := make(chan rune)
 	isEnd := make(chan bool)
 
-	apple := Create()
+	apple := CreateApple(&snake)
 	go snake.Go(whichKey, isEnd, &apple)
 	go field.Draw(&snake, &apple)
 	go GetKeys(whichKey, isEnd)
