@@ -25,7 +25,7 @@ func start() {
 	apple := Create()
 	go snake.Go(whichKey, isEnd, &apple)
 	go field.Draw(&snake, &apple)
-	go GetKeys(whichKey)
+	go GetKeys(whichKey, isEnd)
 
 	if <-isEnd {
 		fmt.Println("Game over")

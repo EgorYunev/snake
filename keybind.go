@@ -6,7 +6,7 @@ import (
 	"github.com/eiannone/keyboard"
 )
 
-func GetKeys(whichKey chan rune) {
+func GetKeys(whichKey chan rune, isEnd chan bool) {
 
 	if err := keyboard.Open(); err != nil {
 		panic(err)
@@ -20,6 +20,7 @@ func GetKeys(whichKey chan rune) {
 			panic(err)
 		}
 		if key == keyboard.KeyEsc {
+			isEnd <- true
 			break
 		}
 		whichKey <- char

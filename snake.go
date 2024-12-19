@@ -27,9 +27,18 @@ func (s *Snake) Go(whichKey chan rune, isEnd chan bool, a *Apple) {
 			s.Y++
 		}
 
-		if s.X == 10 || s.X == 0 || s.Y == 0 || s.Y == 10 {
-			isEnd <- true
-			return
+		switch s.X {
+		case 10:
+			s.X = 0
+		case 0:
+			s.X = 10
+		}
+
+		switch s.Y {
+		case 10:
+			s.Y = 0
+		case 0:
+			s.Y = 10
 		}
 
 		if s.X == a.X && s.Y == a.Y {
