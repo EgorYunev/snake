@@ -12,22 +12,32 @@ type Snake struct {
 	Y int
 }
 
-func (s *Snake) Create(f *Field) {
-	f.Diametr[s.X][s.Y] = "0"
-}
-
-func (s *Snake) Eat(a *Apple) {
-	if s.X == a.X && s.Y == a.Y {
-		s.Fragments = append(s.Fragments, ">")
-	}
-
-}
-
-func (s *Snake) Go() {
+func (s *Snake) Go(whichKey chan rune, isEnd chan bool, a *Apple) {
 
 	for {
-		s.X++
-		time.Sleep(time.Millisecond * 100)
+
+		switch <-whichKey {
+		case 's':
+			s.X++
+		case 'w':
+			s.X--
+		case 'a':
+			s.Y--
+		case 'd':
+			s.Y++
+		}
+
+		if s.X == 10 || s.X == 0 || s.Y == 0 || s.Y == 10 {
+			isEnd <- true
+			return
+		}
+
+		if s.X == a.X && s.Y == a.Y {
+			s.Fragments = append(s.Fragments, "o")
+			*a = Create()
+		}
+
+		time.Sleep(time.Second / 2)
 	}
 
 }

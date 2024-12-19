@@ -8,11 +8,11 @@ type Apple struct {
 	Y     int
 }
 
-func (a *Apple) Create(f *Field) {
+func Create() Apple {
 
-	a.X = rand.Intn(10) + 1
-	a.Y = rand.Intn(10) + 1
-
-	f.Diametr[a.X][a.Y] = a.Image
+	return Apple{
+		X: rand.Intn(10),
+		Y: rand.Intn(10),
+	}
 
 }

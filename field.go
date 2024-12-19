@@ -11,24 +11,20 @@ type Field struct {
 	Diametr [10][10]string
 }
 
-func (f *Field) Create() {
-
-	for i := 0; i < len(f.Diametr); i++ {
-		for j := 0; j < len(f.Diametr[i]); j++ {
-			f.Diametr[i][j] = "."
-		}
-	}
-
-}
-
-func (f *Field) Draw() {
+func (f *Field) Draw(s *Snake, a *Apple) {
 	for {
 		for i := 0; i < len(f.Diametr); i++ {
 			for j := 0; j < len(f.Diametr[i]); j++ {
-				fmt.Print(f.Diametr[i][j])
+				if i == s.X && j == s.Y {
+					fmt.Print("0")
+				} else if i == a.X && j == a.Y {
+					fmt.Print("A")
+				} else {
+					fmt.Print(".")
+				}
 			}
 			fmt.Println()
 		}
-		time.Sleep(time.Millisecond * 100)
+		time.Sleep(time.Second / 2)
 	}
 }

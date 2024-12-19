@@ -1,8 +1,6 @@
 package main
 
-//Реализовать удлинение змейки
-//Поедание яблока
-//Движение
+import "fmt"
 
 func main() {
 	start()
@@ -16,21 +14,21 @@ func start() {
 
 	field.Diametr = [10][10]string{}
 
-	field.Create()
-
 	snake := Snake{
 		X: 5,
 		Y: 5,
 	}
 
-	apple := Apple{
-		Image: "A",
-	}
+	whichKey := make(chan rune)
+	isEnd := make(chan bool)
 
-	snake.Create(&field)
-	apple.Create(&field)
-	// TODO - гоурутины не работают, доделать
-	go snake.Go()
-	go field.Draw()
+	apple := Create()
+	go snake.Go(whichKey, isEnd, &apple)
+	go field.Draw(&snake, &apple)
+	go GetKeys(whichKey)
+
+	if <-isEnd {
+		fmt.Println("Game over")
+	}
 
 }
